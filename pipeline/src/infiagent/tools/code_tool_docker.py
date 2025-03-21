@@ -68,7 +68,7 @@ class CodeTool(BaseTool):
                  name: Optional[str] = "Code Tool",
                  description: Optional[str] = "tool for code_exec",
                 #  code_tool_id: Optional[str] = "code",
-                 image: Optional[str] = "myimg",
+                 image: Optional[str] = "codesandbox",
                  time_out: Optional[int] = 60,
                  work_dir: Optional[str] = WORKING_DIR,
                  output_dir: Optional[str] = OUTPUT_DIR,
@@ -120,7 +120,7 @@ class CodeTool(BaseTool):
             upload_file_path = os.path.join(UPLOAD_PATH, self._upload_file_name)
         
         # write code to file
-        with open(file_path, "a", encoding="utf-8") as fout:
+        with open(file_path, "w", encoding="utf-8") as fout:
             fout.write(code)
         cmd = f'python3 {file_name}'
         
