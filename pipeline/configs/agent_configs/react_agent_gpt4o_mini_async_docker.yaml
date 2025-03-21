@@ -20,4 +20,4 @@ prompt_template: !prompt ZeroShotReactPrompt
 plugins:
   - name: python_code_sandbox
     type: tool
-    config: configs/tool_configs/async_python_code_sandbox.yaml
+    config: configs/tool_configs/async_python_code_sandbox_docker.yaml
