@@ -1,0 +1,18 @@
+Accuracy by Question: 82.67%
+Accuracy Proportional by Sub-Question: 87.11%
+Accuracy by Sub-Question: 87.82%
+Concept Accuracy Analysis:
+Summary Statistics: 88.46%
+Feature Engineering: 88.46%
+Correlation Analysis: 74.36%
+Machine Learning: 84.62%
+Distribution Analysis: 92.11%
+Outlier Detection: 73.68%
+Comprehensive Data Preprocessing: 62.96%
+
+Concept Count Accuracy Analysis:
+1 Concept(s): 84.27%
+2 Concept(s): 81.03%
+3 Concept(s): 66.67%
+
+Accuracy for Questions with >= 2 Concepts: 80.33%
