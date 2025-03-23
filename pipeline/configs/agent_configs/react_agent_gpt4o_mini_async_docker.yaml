@@ -16,7 +16,7 @@ llm:
     top_p: 0.9
     repetition_penalty: 1.0
     max_tokens: 1024
-prompt_template: !prompt ZeroShotReactPrompt
+prompt_template: !prompt ZeroShotReactPromptWithPrint
 plugins:
   - name: python_code_sandbox
     type: tool
