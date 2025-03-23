@@ -82,7 +82,11 @@ if __name__ == "__main__":
         basename=os.path.splitext(os.path.basename(args.questions_file_path))[0])
 
     questions = read_jsonl(args.questions_file_path)
-    responses = read_jsonl(args.responses_file_path)
+    if args.responses_file_path.endswith(".json"):
+        with open(args.responses_file_path, "r") as f:
+            responses = json.load(f)
+    else:
+        responses = read_jsonl(args.responses_file_path)
 
     for response in responses:
         for question in questions:
