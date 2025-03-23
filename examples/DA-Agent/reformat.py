@@ -28,7 +28,7 @@ def define_arguments():
 def call(messages, args):
     headers = {
         "Content-Type": "application/json",
-        "Authorization": args.api_key
+        "Authorization": f"Bearer {args.api_key}"
     }
 
     data = {
@@ -41,7 +41,11 @@ def call(messages, args):
         try:
             response = requests.post(args.url, headers=headers, data=json.dumps(data))
             result = response.json()
-            return result
+            if "choices" not in result:
+                print(json.dumps(result, indent=2))
+            else:
+                print(result["choices"][0]["message"]["content"])
+                return result
         except Exception as e:
             logging.error(data)
             logging.error(traceback.format_exc())
