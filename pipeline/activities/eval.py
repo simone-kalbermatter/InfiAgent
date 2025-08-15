@@ -16,6 +16,7 @@ from infiagent.services.chat_complete_service import predict
 
 
 logger = get_logger()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class UploadedFile(io.BytesIO):
@@ -127,7 +128,8 @@ def extract_data_from_folder(folder_path):
 
 
 async def main():
-    extracted_data = read_dicts_from_file('./data/da-dev-questions.jsonl')
+    jsonl_path = os.path.join(BASE_DIR, '..', '..', 'examples', 'DA-Agent', 'data', 'da-dev-questions.jsonl')
+    extracted_data = read_dicts_from_file(jsonl_path)
     args = _get_script_params()
 
     model_name = getattr(args, "llm", None)
@@ -150,7 +152,7 @@ async def main():
     else:
         logger.info("use local model ")
 
-    table_path = 'data/da-dev-tables'
+    table_path = os.path.join(BASE_DIR, '..', '..', 'examples', 'DA-Agent', 'data', 'da-dev-tables')
     results = []
 
     i = 1

@@ -28,7 +28,7 @@ def define_arguments():
 def call(messages, args):
     headers = {
         "Content-Type": "application/json",
-        "Authorization": args.api_key
+        "Authorization": f"Bearer {args.api_key}"
     }
 
     data = {
@@ -41,7 +41,11 @@ def call(messages, args):
         try:
             response = requests.post(args.url, headers=headers, data=json.dumps(data))
             result = response.json()
-            return result
+            if "choices" not in result:
+                print(json.dumps(result, indent=2))
+            else:
+                print(result["choices"][0]["message"]["content"])
+                return result
         except Exception as e:
             logging.error(data)
             logging.error(traceback.format_exc())
@@ -82,7 +86,11 @@ if __name__ == "__main__":
         basename=os.path.splitext(os.path.basename(args.questions_file_path))[0])
 
     questions = read_jsonl(args.questions_file_path)
-    responses = read_jsonl(args.responses_file_path)
+    if args.responses_file_path.endswith(".json"):
+        with open(args.responses_file_path, "r") as f:
+            responses = json.load(f)
+    else:
+        responses = read_jsonl(args.responses_file_path)
 
     for response in responses:
         for question in questions:

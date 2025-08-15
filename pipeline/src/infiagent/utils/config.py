@@ -1,8 +1,9 @@
+import os
 import yaml
 from typing import Dict, AnyStr, Union, Any
 from pathlib import Path
 
-from ..prompt import SimpleReactPrompt, ZeroShotReactPrompt
+from ..prompt import SimpleReactPrompt, ZeroShotReactPrompt, ZeroShotReactPromptWithPrint
 from .logger import get_logger
 
 logger = get_logger()
@@ -20,6 +21,8 @@ class Config:
             return SimpleReactPrompt()
         elif value == "ZeroShotReactPrompt":
             return ZeroShotReactPrompt()
+        elif value == "ZeroShotReactPromptWithPrint":  # Add support for your new prompt
+            return ZeroShotReactPromptWithPrint()
         else:
             logger.warning(f"Unknown prompt name: {value}. use default SimpleReactPrompt")
             return SimpleReactPrompt()
@@ -37,6 +40,10 @@ class Config:
            :return: A dictionary containing the configuration.
            :rtype: Dict[AnyStr, Any]
        """
+        if not os.path.isabs(path):
+            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+            path = os.path.join(base_dir, '..', path)
+
         # logger the start of the loading process
         logger.info(f"Starting to load configuration from {path}")
 
